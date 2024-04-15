@@ -6,12 +6,19 @@ import ErrorPage from './routes/ErrorPage'
 import './index.css'
 import LoginPage from './routes/LoginPage'
 import SignUpPage from './routes/SignUpPage'
+import BasketPage from './routes/BasketPage'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootPage />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/basket",
+        element: <BasketPage />
+      },
+    ]
   },
   {
     path: "/login",
