@@ -5,6 +5,9 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'logo': ['"Libre Barcode 39 Text"']
+    },
     extend: {},
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],

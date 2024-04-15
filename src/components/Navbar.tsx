@@ -4,7 +4,7 @@ export default function Navbar() {
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <a className="btn btn-ghost text-5xl font-logo" href="/">Bookle Up</a>
             </div>
             <div className="flex-none">
                 <div className="dropdown dropdown-end">
@@ -38,7 +38,7 @@ export default function Navbar() {
                             </a>
                         </li>
                         <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                        <li><a href="/login">Logout</a></li>
                     </ul>
                 </div>
                 <ThemeButton />
