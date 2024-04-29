@@ -8,7 +8,7 @@ export default function BookList() {
     const dispatch: ThunkDispatch<RootState, undefined, UnknownAction> = useDispatch();
     const books = useSelector((state: RootState) => state.books.books);
     const bookStatus = useSelector((state: RootState) => state.books.status);
-    const error = useSelector((state: RootState) => state.books.error);
+    //const error = useSelector((state: RootState) => state.books.error);
 
     useEffect(() => {
         if (bookStatus === 'idle') {
