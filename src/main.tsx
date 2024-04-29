@@ -7,6 +7,9 @@ import './index.css'
 import LoginPage from './routes/LoginPage'
 import SignUpPage from './routes/SignUpPage'
 import BasketPage from './routes/BasketPage'
+import { Provider } from 'react-redux'
+import store from './app/store'
+import ProductsPage from './routes/ProductsPage'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +21,10 @@ const router = createBrowserRouter([
         path: "/basket",
         element: <BasketPage />
       },
+      {
+        path: "/products",
+        element: <ProductsPage />
+      }
     ]
   },
   {
@@ -32,6 +39,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 )
