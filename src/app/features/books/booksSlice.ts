@@ -1,16 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-interface Book {
-    title: string;
-    subtitle: string;
-    isbn: string;
-    abstract: string;
-    numPages: number;
-    author: string;
-    publisher: string;
-    price: string;
-    cover: string;
-}
+import { Book } from "../../../utils/interfaces";
 
 interface BookState {
     books: Book[];
