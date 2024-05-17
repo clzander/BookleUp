@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { BasketContext } from "../contexts/BasketContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 export default function Navbar() {
     const navigate = useNavigate();
     const basketContext = useContext(BasketContext);
+    const authContext = useContext(AuthContext);
 
     return (
         <div className="navbar bg-base-100">
@@ -52,7 +54,7 @@ export default function Navbar() {
                             </a>
                         </li>
                         <li><a>Settings</a></li>
-                        <li><a onClick={() => navigate("/login")}>Logout</a></li>
+                        <li><a onClick={() => authContext.logout()}>Logout</a></li>
                     </ul>
                 </div>
             </div>

@@ -5,6 +5,7 @@ interface AuthContextType {
     isAdmin: boolean;
     register: (email: string, password: string) => void;
     login: (email: string, password: string) => void;
+    logout: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -12,6 +13,7 @@ export const AuthContext = createContext<AuthContextType>({
     isAdmin: false,
     register: () => { },
     login: () => { },
+    logout: () => { },
 });
 
 interface AuthContextProviderProps {
@@ -93,12 +95,19 @@ export default function AuthContextProvider({ children }: AuthContextProviderPro
         });
     };
 
+
+    async function logout() {
+        setAuthed(false);
+        setIsAdmin(false);
+    }
+
     return (
         <AuthContext.Provider value={{
             authed,
             isAdmin,
             register,
             login,
+            logout,
         }}>
             {children}
         </AuthContext.Provider>
