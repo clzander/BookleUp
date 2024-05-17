@@ -1,47 +1,42 @@
 import { useContext } from "react"
 import { BasketContext } from "../contexts/BasketContext"
 import { useNavigate } from "react-router";
+import BasketSummary from "../components/BasketSummary";
 
 export default function BasketPage() {
     const basketContext = useContext(BasketContext);
     const navigate = useNavigate();
 
     return (
-        <div className="flex">
-            <div className="overflow-x-auto grow">
-                <table className="table table-zebra">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Title</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {basketContext.basket.items.map((item, index) => (
+        <div className="flex p-8">
+            <div className="w-2/3">
+                <div className="overflow-x-auto grow mr-16">
+                    <table className="table table-zebra">
+                        {/* head */}
+                        <thead>
                             <tr>
-                                <th>{index}</th>
-                                <td>{item.item.title}</td>
-                                <td>{item.quantity}</td>
-                                <td>{item.itemPrice}</td>
+                                <th></th>
+                                <th>Title</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {basketContext.basket.items.map((item, index) => (
+                                <tr>
+                                    <th>{index}</th>
+                                    <td>{item.item.title}</td>
+                                    <td>{item.quantity}</td>
+                                    <td>{item.itemPrice}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div className="h-100 bg-blue-400 w-32">
-                <p>Basket</p>
-                <p>Items: </p>
-                <p>Shipping: </p>
-                <form>
-                    <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full max-w-xs" />
-                </form>
-                <p>Discount: -0.00$</p>
-                <p>Total: </p>
-                <button onClick={() => navigate("/order")}>Checkout</button>
+            <div className="w-1/3">
+                <BasketSummary itemsTotal={basketContext.basket.totalCost} />
             </div>
         </div>
-    )
-}
+    );
+};
