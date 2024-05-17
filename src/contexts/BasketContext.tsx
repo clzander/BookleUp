@@ -4,16 +4,16 @@ import { Basket, BasketItem, Book } from "../utils/interfaces"
 interface BasketContextType {
     updateBasket: () => void
     addToBasket: (book: Book) => void
-    updateProductInBasket: (isbn: string, quantity: number) => void
-    removeFromBasket: (isbn: string) => void
+    //updateProductInBasket: (isbn: string, quantity: number) => void
+    //removeFromBasket: (isbn: string) => void
     basket: Basket
 }
 
 export const BasketContext = createContext<BasketContextType>({
     updateBasket: () => { },
     addToBasket: () => { },
-    updateProductInBasket: () => {},
-    removeFromBasket: () => { },
+    //updateProductInBasket: () => {},
+    //removeFromBasket: () => { },
     basket: { totalCost: 0, items: [] }
 });
 
@@ -58,18 +58,18 @@ export default function BasketContextProvider({ children }: BasketContextProvide
         setBasket(newBasket);
     }
 
-    async function updateProductInBasket(isbn: string, quantity: number) {
-    }
+    //async function updateProductInBasket(isbn: string, quantity: number) {
+    //}
 
-    async function removeFromBasket(isbn: string) {
-    }
+    //async function removeFromBasket(isbn: string) {
+    //}
 
     return (
         <BasketContext.Provider value={{
             updateBasket,
             addToBasket,
-            updateProductInBasket,
-            removeFromBasket,
+            //updateProductInBasket,
+            //removeFromBasket,
             basket
         }}>
             {children}

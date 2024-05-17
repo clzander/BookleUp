@@ -20,8 +20,8 @@ export default function BookList() {
     return (
         <div>
             {bookStatus === 'loading' && <span className="loading loading-spinner loading-lg"></span>}
-            {books.map(book => (
-                <Book book={book} />
+            {books.map((book) => (
+                <Book key={book.isbn} book={book} />
             ))}
         </div>
     )

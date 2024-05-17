@@ -12,6 +12,7 @@ import { Provider } from 'react-redux'
 import store from './app/store'
 import ProductsPage from './routes/ProductsPage'
 import BasketContextProvider from './contexts/BasketContext'
+import AuthContextProvider from './contexts/AuthContext'
 
 const router = createBrowserRouter([
 	{
@@ -46,9 +47,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<BasketContextProvider>
-				<RouterProvider router={router} />
-			</BasketContextProvider>
+			<AuthContextProvider>
+				<BasketContextProvider>
+					<RouterProvider router={router} />
+				</BasketContextProvider>
+			</AuthContextProvider>
 		</Provider>
 	</React.StrictMode>,
 )
