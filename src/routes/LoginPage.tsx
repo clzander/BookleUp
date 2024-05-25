@@ -19,9 +19,10 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="relative flex flex-col justify-center h-screen overflow-hidden">
-            <div className="w-full p-6 m-auto bg-base-200 rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
-                <h1 className="text-5xl text-center font-logo">Login</h1>
+        <div className="relative flex flex-col justify-center h-screen overflow-hidden bg-base-100">
+               <a className="text-5xl font-logo font-bold mt-auto mb-16 ml-auto mr-auto">Bookle Up</a>
+            <div className="w-full p-6 m-auto mt-16 bg-neutral rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
+                <h1 className="text-3xl font-bold text-center">Login</h1>
                 <form className="space-y-4">
                     <div>
                         <label className="label">

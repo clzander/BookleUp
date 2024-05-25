@@ -18,12 +18,13 @@ export default function BookList() {
     }, [bookStatus, dispatch]);
 
     return (
-        <div className="grid grid-cols-2 gap-x-8 gap-y-8 m-8">
-
-            {bookStatus === 'loading' && <span className="loading loading-spinner loading-lg"></span>}
-            {books.map((book) => (
-                <Book key={book.isbn} book={book} />
-            ))}
+        <div>
+            <div className="grid grid-cols-2 gap-x-8 gap-y-8 m-8">
+                {bookStatus === 'loading' && <span className="loading loading-spinner loading-lg"></span>}
+                {books.map((book) => (
+                    <Book key={book.isbn} book={book} />
+                ))}
+            </div>
         </div>
     )
 }

@@ -2,7 +2,7 @@ export default function Footer() {
     return (
         <footer className="footer items-center p-4 bg-neutral text-neutral-content">
             <aside className="items-center grid-flow-col flex gap-8">
-                <p>Copyright © 2024 - All right reserved</p>
+                <p>Copyright © 2024 - All rights reserved</p>
                 <a>About Us</a>
                 <a>Legal Notice</a>
             </aside>
