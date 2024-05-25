@@ -11,7 +11,7 @@ export default function Book({ book }: BookProps) {
     const [likes, setLikes] = useState<number>(0);
 
     return (
-        <div className="card card-side bg-base-100 shadow-xl">
+        <div className="card card-side bg-accent shadow-xl">
             <figure className="hidden sm:block"><img className="hidden sm:block" src={book.cover} alt="Cover" /></figure>
             <div className="card-body">
                 <h2 className="card-title">{book.title}</h2>

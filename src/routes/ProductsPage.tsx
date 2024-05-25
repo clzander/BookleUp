@@ -2,6 +2,8 @@ import BookList from "../app/features/books/BookList";
 
 export default function ProductsPage() {
     return (
-        <BookList />
+        <div className="overflow-auto">
+            <BookList />
+        </div>
     )
 }

@@ -9,7 +9,7 @@ export default function Navbar() {
     const authContext = useContext(AuthContext);
 
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-neutral">
             <div className="hidden sm:block flex-1">
                 <a className="btn btn-ghost text-5xl font-logo" onClick={() => navigate("/products")}>Bookle Up</a>
             </div>

@@ -13,13 +13,9 @@ export default function RootPage() {
     }, [authContext.authed])
 
     return (
-        <div className="min-h-screen flex flex-col">
-            <div className="flex-grow">
-                 
-                <Navbar />
-                <Outlet />
-            </div>
-
+        <div className="h-screen flex flex-col">
+            <Navbar />
+            <Outlet />
             <Footer />
         </div>
     )
