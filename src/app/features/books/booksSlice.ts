@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Book } from "../../../utils/interfaces";
+import type { Book } from "../../../utils/interfaces";
 
 interface BookState {
     books: Book[];
@@ -14,8 +14,8 @@ const initialState: BookState = {
 };
 
 export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
-    const response = await fetch(`http://127.0.0.1:4730/books`);
-    return response.json();
+    const response = await fetch("http://127.0.0.1:4730/books");
+    return response.json()
 })
 
 const booksSlice = createSlice({

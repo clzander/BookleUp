@@ -8,26 +8,24 @@ export default function BasketPage() {
     const navigate = useNavigate();
 
     return (
-        <div className="flex p-8">
+        <div className="flex p-8 flex-grow">
             <div className="w-2/3">
                 <div className="overflow-x-auto grow mr-16">
                     <table className="table table-zebra">
                         {/* head */}
                         <thead>
                             <tr>
-                                <th></th>
                                 <th>Title</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {basketContext.basket.items.map((item, index) => (
-                                <tr>
-                                    <th>{index}</th>
+                            {basketContext.basket.items.map((item) => (
+                                <tr key={item.item.isbn}>
                                     <td>{item.item.title}</td>
                                     <td>{item.quantity}</td>
-                                    <td>{item.itemPrice}</td>
+                                    <td>{item.itemPrice.toFixed(2)}</td>
                                 </tr>
                             ))}
                         </tbody>

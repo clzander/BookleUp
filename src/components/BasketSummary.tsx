@@ -32,7 +32,7 @@ const BasketSummary = ({ itemsTotal }: BasketSummaryProps) => {
                 <span>Total: </span>
                 <span className="float-right">{total.toFixed(2)} $</span>
             </div>
-            <button className="w-full mt-4 py-2 rounded-md btn">Checkout</button>
+            <button type="button" className="w-full mt-4 py-2 rounded-md btn">Checkout</button>
         </div>
     );
 };

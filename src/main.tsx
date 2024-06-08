@@ -44,14 +44,20 @@ const router = createBrowserRouter([
 	},
 ])
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<AuthContextProvider>
-				<BasketContextProvider>
-					<RouterProvider router={router} />
-				</BasketContextProvider>
-			</AuthContextProvider>
-		</Provider>
-	</React.StrictMode>,
-)
+const rootElement = document.getElementById("root");
+if (rootElement) {
+	ReactDOM.createRoot(rootElement).render(
+		<React.StrictMode>
+			<Provider store={store}>
+				<AuthContextProvider>
+					<BasketContextProvider>
+						<RouterProvider router={router} />
+					</BasketContextProvider>
+				</AuthContextProvider>
+			</Provider>
+		</React.StrictMode>,
+	)
+} else {
+	throw new Error("FATAL ERROR: Couldn't load application!")
+}
+
