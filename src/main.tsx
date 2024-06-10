@@ -13,6 +13,7 @@ import store from './app/store'
 import ProductsPage from './routes/ProductsPage'
 import BasketContextProvider from './contexts/BasketContext'
 import AuthContextProvider from './contexts/AuthContext'
+import AboutPage from './routes/About'
 
 const router = createBrowserRouter([
 	{
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
 			{
 				path: "/products",
 				element: <ProductsPage />
+			},
+			{
+				path: "/about",
+				element: <AboutPage />
 			}
 		]
 	},

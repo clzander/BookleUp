@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router";
+import { Navigate, Outlet, useNavigate } from "react-router";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { 
@@ -13,7 +13,7 @@ export default function RootPage() {
 
     useEffect(() => {
         navigate("/products")
-        //authContext.authed ? navigate("/products") : navigate("/login")
+    //    //authContext.authed ? navigate("/products") : navigate("/login")
     }, [
         //authContext,
         navigate])
