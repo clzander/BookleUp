@@ -39,7 +39,7 @@ export default function LoginPage() {
                     </div>
                     <a className="text-xs hover:underline hover:text-blue-600">Forget Password?</a>
                     <div>
-                        <button onClick={e => onLoginClick(e)} className="btn btn-block bg-base-200">Login</button>
+                        <button type="button" onClick={e => onLoginClick(e)} className="btn btn-block bg-base-200">Login</button>
                     </div>
                     <a onClick={() => navigate("/signup")} className="text-xs hover:underline hover:cursor-pointer hover:text-blue-600">Don't have an account yet? Sign up!</a>
                 </form>
