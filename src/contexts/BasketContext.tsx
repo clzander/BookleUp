@@ -1,78 +1,89 @@
-import { ReactNode, createContext, useState } from "react"
-import { Basket, BasketItem, Book } from "../utils/interfaces"
+import { type ReactNode, createContext, useState } from "react";
+import type { Basket, BasketItem, Book } from "../utils/interfaces";
 
 interface BasketContextType {
-    updateBasket: () => void
-    addToBasket: (book: Book) => void
-    //updateProductInBasket: (isbn: string, quantity: number) => void
-    //removeFromBasket: (isbn: string) => void
-    basket: Basket
+	updateBasket: () => void;
+	addToBasket: (book: Book) => void;
+	//updateProductInBasket: (isbn: string, quantity: number) => void
+	//removeFromBasket: (isbn: string) => void
+	basket: Basket;
 }
 
 export const BasketContext = createContext<BasketContextType>({
-    updateBasket: () => { },
-    addToBasket: () => { },
-    //updateProductInBasket: () => {},
-    //removeFromBasket: () => { },
-    basket: { totalCost: 0, items: [] }
+	updateBasket: () => {},
+	addToBasket: () => {},
+	//updateProductInBasket: () => {},
+	//removeFromBasket: () => { },
+	basket: { totalCost: 0, items: [] },
 });
 
 interface BasketContextProviderProps {
-    children: ReactNode
+	children: ReactNode;
 }
 
-export default function BasketContextProvider({ children }: BasketContextProviderProps) {
-    const [basket, setBasket] = useState<Basket>({ totalCost: 0, items: [] });
+export default function BasketContextProvider({
+	children,
+}: BasketContextProviderProps) {
+	const [basket, setBasket] = useState<Basket>({ totalCost: 0, items: [] });
 
-    async function updateBasket() {
-    }
+	async function updateBasket() {}
 
-    async function addToBasket(book: Book) {
-        const addedBookPrice: number = parseFloat(book.price.replace('$', ''));
+	async function addToBasket(book: Book) {
+		const addedBookPrice: number = Number.parseFloat(
+			book.price.replace("$", ""),
+		);
 
-        const sameProduct = basket.items.find((item) => item.item.isbn === book.isbn);
+		const sameProduct = basket.items.find(
+			(item) => item.item.isbn === book.isbn,
+		);
 
-        let newBasket: Basket;
+		let newBasket: Basket;
 
-        if (sameProduct === undefined) {
-            const newBasketItem: BasketItem = {
-                item: book,
-                quantity: 1,
-                itemPrice: addedBookPrice,
-            }
+		if (sameProduct === undefined) {
+			const newBasketItem: BasketItem = {
+				item: book,
+				quantity: 1,
+				itemPrice: addedBookPrice,
+			};
 
-            newBasket = {
-                totalCost: parseFloat((basket.totalCost + addedBookPrice).toFixed(2)),
-                items: [...basket.items, newBasketItem]
-            }
-        } else {
-            sameProduct.quantity += 1;
-            sameProduct.itemPrice += addedBookPrice;
+			newBasket = {
+				totalCost: Number.parseFloat(
+					(basket.totalCost + addedBookPrice).toFixed(2),
+				),
+				items: [...basket.items, newBasketItem],
+			};
+		} else {
+			sameProduct.quantity += 1;
+			sameProduct.itemPrice += addedBookPrice;
 
-            newBasket = {
-                totalCost: parseFloat((basket.totalCost + addedBookPrice).toFixed(2)),
-                items: [...basket.items]
-            }
-        }
-        
-        setBasket(newBasket);
-    }
+			newBasket = {
+				totalCost: Number.parseFloat(
+					(basket.totalCost + addedBookPrice).toFixed(2),
+				),
+				items: [...basket.items],
+			};
+		}
 
-    //async function updateProductInBasket(isbn: string, quantity: number) {
-    //}
+		setBasket(newBasket);
+	}
 
-    //async function removeFromBasket(isbn: string) {
-    //}
+	//async function updateProductInBasket(isbn: string, quantity: number) {
+	//}
 
-    return (
-        <BasketContext.Provider value={{
-            updateBasket,
-            addToBasket,
-            //updateProductInBasket,
-            //removeFromBasket,
-            basket
-        }}>
-            {children}
-        </BasketContext.Provider>
-    );
+	//async function removeFromBasket(isbn: string) {
+	//}
+
+	return (
+		<BasketContext.Provider
+			value={{
+				updateBasket,
+				addToBasket,
+				//updateProductInBasket,
+				//removeFromBasket,
+				basket,
+			}}
+		>
+			{children}
+		</BasketContext.Provider>
+	);
 }
