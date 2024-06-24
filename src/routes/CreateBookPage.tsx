@@ -104,11 +104,10 @@ export default function CreateBookPage() {
 					</label>
 					<label className="text-xl flex flex-row justify-between items-center">
 						Abstract
-						<input
+						<textarea
 							required
-							type="text"
 							placeholder="Abstract"
-							className="input input-bordered w-full max-w-xs"
+							className="input input-bordered textarea w-full max-w-xs h-24 text-base"
 							value={abstract}
 							onChange={(e) => setAbstract(e.target.value)}
 						/>

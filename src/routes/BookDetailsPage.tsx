@@ -51,9 +51,9 @@ export function BookDetailsPage() {
 				<img alt="left arrow" src="../public/left-arrow.svg" className="w-6" />
 				Back
 			</button>
-			<div className="bg-accent shadow-lg rounded-lg flex-row flex">
+			<div className="bg-accent shadow-lg rounded-lg flex-row flex items-center">
 				{book.cover && (
-					<figure className="w-4/5 h-full overflow-visible">
+					<figure className="w-1/3 h-full overflow-visible">
 						<img
 							className="flex justify-center items-center w-full h-full"
 							src={book.cover}
@@ -62,31 +62,31 @@ export function BookDetailsPage() {
 					</figure>
 				)}
 				{!book.cover && (
-					<p className="w-4/5 h-full m-auto text-center">No Image</p>
+					<p className="w-1/3 h-full m-auto text-center">No Image</p>
 				)}
-				<div className="mt-8 p-6">
-					<h2 className="text-3xl font-bold text-gray-800 mb-2">
+				<div className="mt-8 p-6 w-full">
+					<h2 className="text-3xl font-bold mb-2">
 						{book.title}
 					</h2>
-					<h3 className="text-2xl font-semibold text-gray-600 mb-8">
+					<h3 className="text-2xl font-semibold text-gray-800 mb-8">
 						{book.subtitle}
 					</h3>
-					<p className="text-xl mt-2 text-gray-600">
+					<p className="text-xl mt-2 text-gray-800">
 						<strong>ISBN:</strong> {book.isbn}
 					</p>
-					<p className="text-xl mt-2 text-gray-600">
+					<p className="text-xl mt-2 text-gray-800">
 						<strong>Abstract:</strong> {book.abstract}
 					</p>
-					<p className="text-xl mt-2 text-gray-600">
+					<p className="text-xl mt-2 text-gray-800">
 						<strong>Number of Pages:</strong> {book.numPages}
 					</p>
-					<p className="text-xl mt-2 text-gray-600">
+					<p className="text-xl mt-2 text-gray-800">
 						<strong>Author:</strong> {book.author}
 					</p>
-					<p className="text-xl mt-2 text-gray-600">
+					<p className="text-xl mt-2 text-gray-800">
 						<strong>Publisher:</strong> {book.publisher}
 					</p>
-					<p className="text-xl mt-2 text-gray-600">
+					<p className="text-xl mt-2 text-gray-800">
 						<strong>Price:</strong> {book.price}
 					</p>
 
