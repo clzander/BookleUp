@@ -1,26 +1,20 @@
-import { useNavigate } from "react-router";
+import { useNavigate, useRouteError } from "react-router";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function ErrorPage() {
 	const navigate = useNavigate();
+	const error = useRouteError();
 
 	return (
-		<div className="flex flex-col justify-center text-center">
-			<button
-				type="button"
-				className="btn btn-ghost text-5xl font-logo my-16"
-				onClick={() => navigate("/products")}
-			>
-				Bookle Up
-			</button>
-			<h1 className="text-2xl font-bold">Error</h1>
-			<p>We couldn't find the page you were looking for</p>
-			<button
-				type="button"
-				className="btn"
-				onClick={() => navigate("/products")}
-			>
-				Back to the home page
-			</button>
+		<div className="h-screen flex flex-col">
+			<Navbar />
+			<div className="flex flex-col justify-center text-center flex-grow">
+				<h1 className="text-2xl font-bold">Oops!</h1>
+				<p>Sorry, we couldn't find that page you were looking for.</p>
+				<p>{error.statusText || error.message}</p>
+			</div>
+			<Footer />
 		</div>
 	);
 }

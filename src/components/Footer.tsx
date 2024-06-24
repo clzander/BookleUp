@@ -1,9 +1,15 @@
+import { useNavigate } from "react-router";
+
 export default function Footer() {
+	const navigate = useNavigate();
+
 	return (
 		<footer className="footer items-center p-4 bg-neutral text-neutral-content">
 			<aside className="items-center grid-flow-col flex gap-8">
 				<p>Copyright © 2024 - All rights reserved</p>
-				<a>About Us</a>
+				<button type="button" onClick={() => navigate("/about")}>
+					About Us
+				</button>
 				<a>Legal Notice</a>
 			</aside>
 			<nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">

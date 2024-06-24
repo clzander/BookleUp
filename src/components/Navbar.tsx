@@ -6,17 +6,18 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function Navbar() {
 	const navigate = useNavigate();
 	const basketContext = useContext(BasketContext);
-	const authContext = useContext(AuthContext);
+	const { isAdmin, logout } = useContext(AuthContext);
 
 	return (
 		<div className="navbar bg-neutral min-h-20">
 			<div className="hidden sm:block flex-1">
-				<a
+				<button
+					type="button"
 					className="btn btn-ghost text-5xl font-logo"
 					onClick={() => navigate("/products")}
 				>
 					Bookle Up
-				</a>
+				</button>
 			</div>
 			<label className="input input-bordered flex items-center gap-2 rounded-3xl h-10 mr-8">
 				<input type="text" className="grow" placeholder="Search" />
@@ -26,6 +27,7 @@ export default function Navbar() {
 					fill="currentColor"
 					className="w-4 h-4 opacity-70"
 				>
+					<title>Search Icon</title>
 					<path
 						fillRule="evenodd"
 						d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
@@ -44,6 +46,7 @@ export default function Navbar() {
 								viewBox="0 0 24 24"
 								stroke="currentColor"
 							>
+								<title>Indicator</title>
 								<path
 									strokeLinecap="round"
 									strokeLinejoin="round"
@@ -56,10 +59,7 @@ export default function Navbar() {
 							</span>
 						</div>
 					</div>
-					<div
-						tabIndex={0}
-						className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
-					>
+					<div className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
 						<div className="card-body">
 							<span className="font-bold text-lg">
 								{basketContext.basket.items.length}{" "}
@@ -70,6 +70,8 @@ export default function Navbar() {
 							</span>
 							<div className="card-actions">
 								<button
+									type="button"
+									disabled={isAdmin}
 									className="btn btn-secondary btn-block"
 									onClick={() => navigate("/basket")}
 								>
@@ -89,21 +91,20 @@ export default function Navbar() {
 							<img className="scale-75" alt="Profile" src="profile.svg" />
 						</div>
 					</div>
-					<ul
-						tabIndex={0}
-						className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-					>
+					<ul className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
 						<li>
-							<a className="justify-between">
+							<button type="button" className="justify-between">
 								Profile
 								<span className="badge">New</span>
-							</a>
+							</button>
 						</li>
 						<li>
-							<a>Settings</a>
+							<button type="button">Settings</button>
 						</li>
 						<li>
-							<a onClick={() => authContext.logout()}>Logout</a>
+							<button onClick={() => logout()} type="button">
+								Logout
+							</button>
 						</li>
 					</ul>
 				</div>

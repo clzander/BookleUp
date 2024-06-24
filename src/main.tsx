@@ -9,13 +9,17 @@ import BasketPage from "./routes/BasketPage";
 import OrderPage from "./routes/OrderPage";
 import { Provider } from "react-redux";
 import store from "./app/store";
-import ProductsPage from "./routes/ProductsPage";
 import BasketContextProvider from "./contexts/BasketContext";
 import AuthContextProvider from "./contexts/AuthContext";
 import AboutPage from "./routes/About";
-import BookDetailsPage, {
-	bookDetailsPageLoader,
+import {
+	BookDetailsPage,
+	BookDetailsPageLoader,
 } from "./routes/BookDetailsPage";
+import EditBookPage, { EditBookPageLoader } from "./routes/EditBookPage";
+import BooksPage from "./routes/BooksPage";
+import CreateBookPage from "./routes/CreateBookPage";
+import DeleteBookPage, { DeleteBookPageLoader } from "./routes/DelteBookPage";
 
 const router = createBrowserRouter([
 	{
@@ -29,7 +33,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/products",
-				element: <ProductsPage />,
+				element: <BooksPage />,
 			},
 			{
 				path: "/about",
@@ -37,8 +41,22 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/products/:isbn",
-				loader: bookDetailsPageLoader,
+				loader: BookDetailsPageLoader,
 				element: <BookDetailsPage />,
+			},
+			{
+				path: "/products/:isbn/edit",
+				loader: EditBookPageLoader,
+				element: <EditBookPage />,
+			},
+			{
+				path: "/products/:isbn/delete",
+				loader: DeleteBookPageLoader,
+				element: <DeleteBookPage />,
+			},
+			{
+				path: "products/create",
+				element: <CreateBookPage />,
 			},
 		],
 	},

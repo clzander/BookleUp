@@ -6,6 +6,7 @@ interface AuthContextType {
 	error: Error | null;
 	authed: boolean;
 	isAdmin: boolean;
+	token: string;
 	login: (email: string, password: string) => void;
 	logout: () => void;
 }
@@ -15,6 +16,7 @@ export const AuthContext = createContext<AuthContextType>({
 	error: null,
 	authed: false,
 	isAdmin: false,
+	token: "",
 	login: () => {},
 	logout: () => {},
 });
@@ -45,6 +47,7 @@ export default function AuthContextProvider({
 	const [isAdmin, setIsAdmin] = useState<boolean>(false);
 	const [state, setState] = useState<FetchState>("initial");
 	const [error, setError] = useState<Error | null>(null);
+	const [token, setToken] = useState<string>("");
 
 	async function login(email: string, password: string) {
 		setState("loading");
@@ -68,11 +71,12 @@ export default function AuthContextProvider({
 				if (response.ok) {
 					return response.json() as Promise<AuthResponseType>;
 				}
-				throw new Error("Network response was not ok!");
+				throw new Error("Email or Password were incorrect");
 			})
 			.then((data) => {
 				setAuthed(true);
 				setIsAdmin(data.user.id === 1);
+				setToken(data.accessToken);
 				setState("success");
 			})
 			.catch((error) => {
@@ -88,6 +92,7 @@ export default function AuthContextProvider({
 	async function logout() {
 		setAuthed(false);
 		setIsAdmin(false);
+		setToken("");
 	}
 
 	return (
@@ -97,6 +102,7 @@ export default function AuthContextProvider({
 				error,
 				authed,
 				isAdmin,
+				token,
 				login,
 				logout,
 			}}

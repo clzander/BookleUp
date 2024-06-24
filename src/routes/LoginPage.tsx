@@ -27,6 +27,7 @@ export default function LoginPage() {
 			</p>
 			<div className="w-full p-6 m-auto mt-16 bg-neutral rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
 				<h1 className="text-3xl font-bold text-center">Login</h1>
+				<p className="font-bold text-error">{error?.message}</p>
 				<form className="space-y-4">
 					<div>
 						<label className="label">
@@ -34,6 +35,7 @@ export default function LoginPage() {
 						</label>
 						<input
 							type="text"
+							required
 							placeholder="Email Address"
 							className={`w-full input input-bordered ${error ? "input-error border-2" : ""}`}
 							onChange={(e) => setEmail(e.target.value)}
@@ -45,6 +47,7 @@ export default function LoginPage() {
 						</label>
 						<input
 							type="password"
+							required
 							placeholder="Enter Password"
 							className={`w-full input input-bordered ${error ? "input-error border-2" : ""}`}
 							onChange={(e) => setPassword(e.target.value)}
