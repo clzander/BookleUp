@@ -71,7 +71,7 @@ export default function AuthContextProvider({
 				if (response.ok) {
 					return response.json() as Promise<AuthResponseType>;
 				}
-				throw new Error("Email or Password were incorrect");
+				throw new Error("Incorrect username or password. Please try again.");
 			})
 			.then((data) => {
 				setAuthed(true);
