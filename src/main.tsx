@@ -20,6 +20,7 @@ import EditBookPage, { EditBookPageLoader } from "./routes/EditBookPage";
 import BooksPage from "./routes/BooksPage";
 import CreateBookPage from "./routes/CreateBookPage";
 import DeleteBookPage, { DeleteBookPageLoader } from "./routes/DelteBookPage";
+import RequireLogin from "./components/RequiresLogin";
 
 const router = createBrowserRouter([
 	{
@@ -29,11 +30,19 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: "/basket",
-				element: <BasketPage />,
+				element: (
+					<RequireLogin>
+						<BasketPage />
+					</RequireLogin>
+				),
 			},
 			{
 				path: "/products",
-				element: <BooksPage />,
+				element: (
+					<RequireLogin>
+						<BooksPage />
+					</RequireLogin>
+				),
 			},
 			{
 				path: "/about",
@@ -42,32 +51,48 @@ const router = createBrowserRouter([
 			{
 				path: "/products/:isbn",
 				loader: BookDetailsPageLoader,
-				element: <BookDetailsPage />,
+				element: (
+					<RequireLogin>
+						<BookDetailsPage />
+					</RequireLogin>
+				),
 			},
 			{
 				path: "/products/:isbn/edit",
 				loader: EditBookPageLoader,
-				element: <EditBookPage />,
+				element: (
+					<RequireLogin>
+						<EditBookPage />
+					</RequireLogin>
+				),
 			},
 			{
 				path: "/products/:isbn/delete",
 				loader: DeleteBookPageLoader,
-				element: <DeleteBookPage />,
+				element: (
+					<RequireLogin>
+						<DeleteBookPage />
+					</RequireLogin>
+				),
 			},
 			{
 				path: "products/create",
-				element: <CreateBookPage />,
+				element: (
+					<RequireLogin>
+						<CreateBookPage />
+					</RequireLogin>
+				),
+			},
+			{
+				path: "/login",
+				element: <LoginPage />,
+			},
+			{
+				path: "/order",
+				element: <OrderPage />,
 			},
 		],
-	},
-	{
-		path: "/login",
-		element: <LoginPage />,
-	},
-	{
-		path: "/order",
-		element: <OrderPage />,
-	},
+	}
 ]);
 
 const rootElement = document.getElementById("root");

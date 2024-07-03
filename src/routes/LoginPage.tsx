@@ -22,9 +22,6 @@ export default function LoginPage() {
 
 	return (
 		<div className="relative flex flex-col justify-center h-screen overflow-hidden bg-base-100">
-			<p className="text-5xl font-logo font-bold mt-auto mb-16 ml-auto mr-auto">
-				Bookle Up
-			</p>
 			<div className="w-full p-6 m-auto mt-16 bg-neutral rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-lg">
 				<h1 className="text-3xl font-bold text-center">Login</h1>
 				<p className="font-bold text-error">{error?.message}</p>

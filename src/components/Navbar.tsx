@@ -6,7 +6,7 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function Navbar() {
 	const navigate = useNavigate();
 	const basketContext = useContext(BasketContext);
-	const { isAdmin, logout } = useContext(AuthContext);
+	const { isAdmin, logout, authed } = useContext(AuthContext);
 
 	return (
 		<div className="navbar bg-neutral min-h-20">
@@ -20,7 +20,7 @@ export default function Navbar() {
 				</button>
 			</div>
 			<label className="input input-bordered flex items-center gap-2 rounded-3xl h-10 mr-8">
-				<input type="text" className="grow" placeholder="Search" />
+				<input type="text" className="grow" placeholder="Search" disabled={!authed}/>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 16 16"
@@ -71,7 +71,7 @@ export default function Navbar() {
 							<div className="card-actions">
 								<button
 									type="button"
-									disabled={isAdmin}
+									disabled={isAdmin || !authed}
 									className="btn btn-secondary btn-block"
 									onClick={() => navigate("/basket")}
 								>

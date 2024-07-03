@@ -1,7 +1,7 @@
 export default function AboutPage() {
 	return (
-		<div className="flex flex-col items-center justify-center overflow-auto flex-grow bg-gray-100 py-12">
-			<div className="max-w-4xl bg-white shadow-md rounded-lg p-8">
+		<div className="overflow-auto flex-grow">
+			<div className="bg-white shadow-md rounded-lg p-8 w-3/5 mx-auto m-8">
 				<h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">
 					About Us
 				</h1>
@@ -24,7 +24,7 @@ export default function AboutPage() {
 				<p className="text-gray-700 text-lg mb-8">
 					Sincerely,
 					<br />
-					The Bookle Up Team
+					The BookleUp Team
 				</p>
 				<h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">
 					Impressum

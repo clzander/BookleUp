@@ -14,7 +14,7 @@ export default function BasketPage() {
 	return (
 		<div>
 			{!loaded ? (
-				<span className="loading loading-spinner loading-lg"></span>
+				<span className="loading loading-spinner loading-lg"/>
 			) : (
 				<p>Thank's for your order!</p>
 			)}
