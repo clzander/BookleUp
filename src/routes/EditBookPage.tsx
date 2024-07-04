@@ -76,7 +76,6 @@ export default function EditBookPage() {
 			mode: "cors", // no-cors, *cors, same-origin
 			headers: {
 				"Content-Type": "application/json",
-				Bearer: user.token,
 				// 'Content-Type': 'application/x-www-form-urlencoded',
 			},
 			body: JSON.stringify(payload),

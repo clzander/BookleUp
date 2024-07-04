@@ -2,21 +2,17 @@ import { type ReactNode, createContext, useState } from "react";
 import type { FetchState } from "../utils/interfaces";
 
 interface AuthContextType {
-	state: FetchState;
 	error: Error | null;
 	authed: boolean;
 	isAdmin: boolean;
-	token: string;
 	login: (email: string, password: string) => void;
 	logout: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
-	state: "initial",
 	error: null,
 	authed: false,
 	isAdmin: false,
-	token: "",
 	login: () => {},
 	logout: () => {},
 });
@@ -98,11 +94,9 @@ export default function AuthContextProvider({
 	return (
 		<AuthContext.Provider
 			value={{
-				state,
 				error,
 				authed,
 				isAdmin,
-				token,
 				login,
 				logout,
 			}}
