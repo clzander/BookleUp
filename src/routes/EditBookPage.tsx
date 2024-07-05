@@ -1,10 +1,9 @@
-import { type FormEvent, useContext, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import {
 	type LoaderFunctionArgs,
 	useLoaderData,
 	useNavigate,
 } from "react-router";
-import { AuthContext } from "../contexts/AuthContext";
 import type { Book } from "../utils/interfaces";
 import { useStore } from "../domain/store";
 
@@ -40,7 +39,7 @@ export default function EditBookPage() {
 	const navigate = useNavigate();
 	const isAdmin = useStore(state => state.isAdmin);
 	const [title, setTitle] = useState<string>(book.title);
-	const [subtitle, setSubstitle] = useState<string>(book.subtitle);
+	const [subtitle, setSubtitle] = useState<string>(book.subtitle);
 	const [isbn, setIsbn] = useState<string>(book.isbn);
 	const [abstract, setAbstract] = useState<string>(book.abstract);
 	const [numPages, setNumPages] = useState<number>(book.numPages);
@@ -124,7 +123,7 @@ export default function EditBookPage() {
 							placeholder="Subtitle"
 							className="input input-bordered w-full max-w-xs"
 							value={subtitle}
-							onChange={(e) => setSubstitle(e.target.value)}
+							onChange={(e) => setSubtitle(e.target.value)}
 						/>
 					</label>
 					<label className="text-xl flex flex-row justify-between items-center">
