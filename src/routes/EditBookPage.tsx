@@ -88,7 +88,6 @@ export default function EditBookPage() {
 				throw new Error("Couldn't save changes for book");
 			})
 			.then((data) => {
-				console.log(data);
 				return data;
 			})
 			.catch((error) => {

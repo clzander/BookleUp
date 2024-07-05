@@ -12,7 +12,6 @@ export default function LoginPage() {
 	const [password, setPassword] = useState<string>("");
 
 	useEffect(() => {
-		console.log("Checking authenticated status");
 		authenticated ? navigate("/products") : navigate("/login");
 	}, [authenticated, navigate]);
 
@@ -20,7 +19,6 @@ export default function LoginPage() {
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	) {
 		e.preventDefault();
-		console.log("Calling login function")
 		login(email, password);
 	}
 
