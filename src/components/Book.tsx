@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import type { Book as BookType } from "../utils/interfaces";
 import { BasketContext } from "../contexts/BasketContext";
 import { useNavigate } from "react-router";
-import { AuthContext } from "../contexts/AuthContext";
+import { useStore } from "../domain/store";
 
 interface BookProps {
 	book: BookType;
@@ -12,7 +12,7 @@ interface BookProps {
 
 export default function Book({ book, refresh, deleteBook }: BookProps) {
 	const basketContext = useContext(BasketContext);
-	const { isAdmin } = useContext(AuthContext);
+	const isAdmin = useStore(state => state.isAdmin);
 	const [likes, setLikes] = useState<number>(0);
 	const navigate = useNavigate();
 

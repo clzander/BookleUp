@@ -1,8 +1,8 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import useBooks from "../domain/hooks";
 import Book from "../components/Book";
 import { useNavigate } from "react-router";
-import { AuthContext } from "../contexts/AuthContext";
+import { useStore } from "../domain/store";
 
 export default function BooksPage() {
 	const {
@@ -18,7 +18,7 @@ export default function BooksPage() {
 		deleteBook,
 	} = useBooks();
 	const navigate = useNavigate();
-	const user = useContext(AuthContext);
+	const isAdmin = useStore(state => state.isAdmin);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -31,7 +31,7 @@ export default function BooksPage() {
 
 	return (
 		<div className="overflow-auto flex-grow">
-			{user.isAdmin && (
+			{isAdmin && (
 				<div className="mt-8 mr-8 flex justify-end">
 					<button
 						type="button"

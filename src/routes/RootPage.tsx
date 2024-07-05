@@ -1,16 +1,16 @@
 import { Outlet, useNavigate } from "react-router";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../contexts/AuthContext";
+import { useEffect } from "react";
+import { useStore } from "../domain/store";
 
 export default function RootPage() {
-	const authContext = useContext(AuthContext);
+	const authenticated = useStore(state => state.authenticated);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		authContext.authed ? navigate("/products") : navigate("/login");
-	}, [authContext, navigate]);
+		authenticated ? navigate("/products") : navigate("/login");
+	}, [authenticated, navigate]);
 
 	return (
 		<div className="h-screen flex flex-col">

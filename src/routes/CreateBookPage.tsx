@@ -1,10 +1,10 @@
-import { type FormEvent, useContext, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { AuthContext } from "../contexts/AuthContext";
+import { useStore } from "../domain/store";
 
 export default function CreateBookPage() {
 	const navigate = useNavigate();
-	const user = useContext(AuthContext);
+	const isAdmin = useStore(state => state.isAdmin);
 	const [title, setTitle] = useState<string>("");
 	const [subtitle, setSubstitle] = useState<string>("");
 	const [isbn, setIsbn] = useState<string>("");
@@ -16,7 +16,7 @@ export default function CreateBookPage() {
 	const [cover, setCover] = useState<string>("");
 
 	useEffect(() => {
-		if (!user.isAdmin) {
+		if (!isAdmin) {
 			navigate("/products");
 		}
 	});

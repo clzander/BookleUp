@@ -5,8 +5,8 @@ import {
 } from "react-router";
 import type { Book } from "../utils/interfaces";
 import { useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext";
 import { BasketContext } from "../contexts/BasketContext";
+import { useStore } from "../domain/store";
 
 export const BookDetailsPageLoader = async ({ params }: LoaderFunctionArgs) => {
 	const fetchURL: string = `http://127.0.0.1:4730/books/${params.isbn}`;
@@ -38,7 +38,7 @@ export const BookDetailsPageLoader = async ({ params }: LoaderFunctionArgs) => {
 export function BookDetailsPage() {
 	const book = useLoaderData() as Book;
 	const navigate = useNavigate();
-	const { isAdmin } = useContext(AuthContext);
+	const isAdmin = useStore(state => state.isAdmin);
 	const basketContext = useContext(BasketContext);
 
 	return (

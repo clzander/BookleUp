@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { BasketContext } from "../contexts/BasketContext";
-import { AuthContext } from "../contexts/AuthContext";
+import { useStore } from "../domain/store";
 
 export default function Navbar() {
 	const navigate = useNavigate();
 	const basketContext = useContext(BasketContext);
-	const { isAdmin, logout, authed } = useContext(AuthContext);
+	const isAdmin = useStore(state => state.isAdmin)
+	const authenticated = useStore(state => state.authenticated)
+	const logout = useStore(state => state.logout)
 
 	return (
 		<div className="navbar bg-neutral min-h-20">
@@ -20,7 +22,7 @@ export default function Navbar() {
 				</button>
 			</div>
 			<label className="input input-bordered flex items-center gap-2 rounded-3xl h-10 mr-8">
-				<input type="text" className="grow" placeholder="Search" disabled={!authed}/>
+				<input type="text" className="grow" placeholder="Search" disabled={!authenticated}/>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 16 16"
@@ -71,7 +73,7 @@ export default function Navbar() {
 							<div className="card-actions">
 								<button
 									type="button"
-									disabled={isAdmin || !authed}
+									disabled={isAdmin || !authenticated}
 									className="btn btn-secondary btn-block"
 									onClick={() => navigate("/basket")}
 								>

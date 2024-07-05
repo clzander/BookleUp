@@ -1,22 +1,26 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { AuthContext } from "../contexts/AuthContext";
+import { useStore } from "../domain/store";
 
 export default function LoginPage() {
-	const { authed, login, error } = useContext(AuthContext);
+	const login = useStore((state) => state.login)
+	const authenticated = useStore((state) => state.authenticated)
+	const error = useStore((state) => state.error)
 	const navigate = useNavigate();
 
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 
 	useEffect(() => {
-		authed ? navigate("/products") : navigate("/login");
-	}, [authed, navigate]);
+		console.log("Checking authenticated status");
+		authenticated ? navigate("/products") : navigate("/login");
+	}, [authenticated, navigate]);
 
 	async function onLoginClick(
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
 	) {
 		e.preventDefault();
+		console.log("Calling login function")
 		login(email, password);
 	}
 

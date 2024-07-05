@@ -6,6 +6,7 @@ import {
 } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
 import type { Book } from "../utils/interfaces";
+import { useStore } from "../domain/store";
 
 export const EditBookPageLoader = async ({ params }: LoaderFunctionArgs) => {
 	const fetchURL: string = `http://127.0.0.1:4730/books/${params.isbn}`;
@@ -37,7 +38,7 @@ export const EditBookPageLoader = async ({ params }: LoaderFunctionArgs) => {
 export default function EditBookPage() {
 	const book: Book = useLoaderData() as Book;
 	const navigate = useNavigate();
-	const user = useContext(AuthContext);
+	const isAdmin = useStore(state => state.isAdmin);
 	const [title, setTitle] = useState<string>(book.title);
 	const [subtitle, setSubstitle] = useState<string>(book.subtitle);
 	const [isbn, setIsbn] = useState<string>(book.isbn);
@@ -48,7 +49,7 @@ export default function EditBookPage() {
 	const [price, setPrice] = useState<string>(book.price);
 
 	useEffect(() => {
-		if (!user.isAdmin) {
+		if (!isAdmin) {
 			navigate("/products");
 		}
 	});
