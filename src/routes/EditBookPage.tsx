@@ -1,11 +1,10 @@
-import { type FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useState } from "react";
 import {
 	type LoaderFunctionArgs,
 	useLoaderData,
 	useNavigate,
 } from "react-router";
 import type { Book } from "../utils/interfaces";
-import { useStore } from "../domain/store";
 
 export const EditBookPageLoader = async ({ params }: LoaderFunctionArgs) => {
 	const fetchURL: string = `http://127.0.0.1:4730/books/${params.isbn}`;
@@ -37,7 +36,6 @@ export const EditBookPageLoader = async ({ params }: LoaderFunctionArgs) => {
 export default function EditBookPage() {
 	const book: Book = useLoaderData() as Book;
 	const navigate = useNavigate();
-	const isAdmin = useStore(state => state.isAdmin);
 	const [title, setTitle] = useState<string>(book.title);
 	const [subtitle, setSubtitle] = useState<string>(book.subtitle);
 	const [isbn, setIsbn] = useState<string>(book.isbn);
@@ -46,12 +44,6 @@ export default function EditBookPage() {
 	const [author, setAuthor] = useState<string>(book.author);
 	const [publisher, setPublisher] = useState<string>(book.publisher);
 	const [price, setPrice] = useState<string>(book.price);
-
-	useEffect(() => {
-		if (!isAdmin) {
-			navigate("/products");
-		}
-	});
 
 	async function handleSubmit(event: FormEvent) {
 		event.preventDefault();

@@ -1,10 +1,8 @@
-import { type FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useState } from "react";
 import { useNavigate } from "react-router";
-import { useStore } from "../domain/store";
 
 export default function CreateBookPage() {
 	const navigate = useNavigate();
-	const isAdmin = useStore(state => state.isAdmin);
 	const [title, setTitle] = useState<string>("");
 	const [subtitle, setSubstitle] = useState<string>("");
 	const [isbn, setIsbn] = useState<string>("");
@@ -14,12 +12,6 @@ export default function CreateBookPage() {
 	const [publisher, setPublisher] = useState<string>("");
 	const [price, setPrice] = useState<string>("");
 	const [cover, setCover] = useState<string>("");
-
-	useEffect(() => {
-		if (!isAdmin) {
-			navigate("/products");
-		}
-	});
 
 	async function handleSubmit(event: FormEvent) {
 		event.preventDefault();

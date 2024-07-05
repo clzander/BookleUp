@@ -19,6 +19,7 @@ import BooksPage from "./routes/BooksPage";
 import CreateBookPage from "./routes/CreateBookPage";
 import DeleteBookPage, { DeleteBookPageLoader } from "./routes/DelteBookPage";
 import RequireLogin from "./components/RequiresLogin";
+import RequireAdmin from "./components/RequiresAdmin";
 
 const router = createBrowserRouter([
 	{
@@ -59,26 +60,26 @@ const router = createBrowserRouter([
 				path: "/products/:isbn/edit",
 				loader: EditBookPageLoader,
 				element: (
-					<RequireLogin>
+					<RequireAdmin>
 						<EditBookPage />
-					</RequireLogin>
+					</RequireAdmin>
 				),
 			},
 			{
 				path: "/products/:isbn/delete",
 				loader: DeleteBookPageLoader,
 				element: (
-					<RequireLogin>
+					<RequireAdmin>
 						<DeleteBookPage />
-					</RequireLogin>
+					</RequireAdmin>
 				),
 			},
 			{
 				path: "products/create",
 				element: (
-					<RequireLogin>
+					<RequireAdmin>
 						<CreateBookPage />
-					</RequireLogin>
+					</RequireAdmin>
 				),
 			},
 			{
