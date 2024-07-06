@@ -1,6 +1,5 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import type { Book as BookType } from "../utils/interfaces";
-import { BasketContext } from "../contexts/BasketContext";
 import { useNavigate } from "react-router";
 import { useStore } from "../domain/store";
 
@@ -11,8 +10,8 @@ interface BookProps {
 }
 
 export default function Book({ book, refresh, deleteBook }: BookProps) {
-	const basketContext = useContext(BasketContext);
 	const isAdmin = useStore(state => state.isAdmin);
+	const addToBasket = useStore(state => state.addToBasket);
 	const [likes, setLikes] = useState<number>(0);
 	const navigate = useNavigate();
 
@@ -114,7 +113,7 @@ export default function Book({ book, refresh, deleteBook }: BookProps) {
 						type="button"
 						disabled={isAdmin}
 						className="btn btn-primarsy"
-						onClick={() => basketContext.addToBasket(book)}
+						onClick={() => addToBasket(book)}
 					>
 						Buy
 					</button>

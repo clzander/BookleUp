@@ -1,13 +1,12 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router";
-import { BasketContext } from "../contexts/BasketContext";
 import { useStore } from "../domain/store";
 
 export default function Navbar() {
 	const navigate = useNavigate();
-	const basketContext = useContext(BasketContext);
 	const isAdmin = useStore(state => state.isAdmin)
 	const authenticated = useStore(state => state.authenticated)
+	const basket = useStore(state => state.basket);
+	const calculateTotalCost = useStore(state => state.calculateTotalCost);
 	const logout = useStore(state => state.logout)
 
 	return (
@@ -57,18 +56,18 @@ export default function Navbar() {
 								/>
 							</svg>
 							<span className="badge badge-sm indicator-item">
-								{basketContext.basket.items.length}
+								{basket.length}
 							</span>
 						</div>
 					</div>
 					<div className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
 						<div className="card-body">
 							<span className="font-bold text-lg">
-								{basketContext.basket.items.length}{" "}
-								{basketContext.basket.items.length === 1 ? "Item" : "Items"}
+								{basket.length}{" "}
+								{basket.length === 1 ? "Item" : "Items"}
 							</span>
 							<span className="text-info">
-								Subtotal: ${basketContext.basket.totalCost}
+								Subtotal: ${calculateTotalCost().toFixed(2)}
 							</span>
 							<div className="card-actions">
 								<button

@@ -7,8 +7,6 @@ import "./index.css";
 import LoginPage from "./routes/LoginPage";
 import BasketPage from "./routes/BasketPage";
 import OrderPage from "./routes/OrderPage";
-import BasketContextProvider from "./contexts/BasketContext";
-import AuthContextProvider from "./contexts/AuthContext";
 import AboutPage from "./routes/About";
 import {
 	BookDetailsPage,
@@ -91,18 +89,14 @@ const router = createBrowserRouter([
 				element: <OrderPage />,
 			},
 		],
-	}
+	},
 ]);
 
 const rootElement = document.getElementById("root");
 if (rootElement) {
 	ReactDOM.createRoot(rootElement).render(
 		<React.StrictMode>
-				<AuthContextProvider>
-					<BasketContextProvider>
-						<RouterProvider router={router} />
-					</BasketContextProvider>
-				</AuthContextProvider>
+			<RouterProvider router={router} />
 		</React.StrictMode>,
 	);
 } else {

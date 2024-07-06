@@ -1,11 +1,6 @@
 import { create } from "zustand";
-
-interface BasketItem {
-	id: string;
-	name: string;
-	quantity: number;
-	price: number;
-}
+import type { Book } from "../utils/interfaces";
+import { getBook } from "../utils/api";
 
 interface AuthPayloadType {
 	email: string;
@@ -22,6 +17,16 @@ interface AuthResponseType {
 	};
 }
 
+interface BasketItem {
+	book: Book;
+	quantity: number;
+}
+
+interface ReducedBasketItem {
+	id: string;
+	quantity: number;
+}
+
 interface StoreState {
 	authenticated: boolean;
 	isAdmin: boolean;
@@ -31,8 +36,9 @@ interface StoreState {
 	logout: () => void;
 
 	basket: BasketItem[];
-	addToBasket: (item: BasketItem) => void;
+	addToBasket: (item: Book) => void;
 	removeFromBasket: (id: string) => void;
+	calculateTotalCost: () => number;
 	clearBasket: () => void;
 	loadBasket: () => void;
 	saveBasket: () => void;
@@ -68,6 +74,7 @@ export const useStore = create<StoreState>()((set, get) => ({
 				set({ isAdmin: data.user.role === "admin" });
 				set({ error: null });
 				set({ email: email });
+				get().loadBasket();
 			})
 			.catch((error) => {
 				console.error(
@@ -76,7 +83,6 @@ export const useStore = create<StoreState>()((set, get) => ({
 				);
 				set({ error: error });
 			});
-		get().loadBasket();
 	},
 	logout: () => {
 		get().saveBasket();
@@ -87,27 +93,65 @@ export const useStore = create<StoreState>()((set, get) => ({
 	},
 
 	basket: [],
-	addToBasket: (item) =>
+	addToBasket: (newBook) => {
+		const alreadyInBasket = get().basket.find(
+			(itemInBasket) => itemInBasket.book.isbn === newBook.isbn,
+		);
+		if (alreadyInBasket) {
+			alreadyInBasket.quantity += 1;
+			set((state) => ({ basket: [...state.basket] }));
+		} else {
+			const newBasketItem = {
+				book: newBook,
+				quantity: 1,
+			};
+			set((state) => ({ basket: [...state.basket, newBasketItem] }));
+		}
+	},
+	removeFromBasket: (isbn) =>
 		set((state) => ({
-			basket: [...state.basket, item],
+			basket: state.basket.filter(
+				(basketItem) => basketItem.book.isbn !== isbn,
+			),
 		})),
-	removeFromBasket: (id) =>
-		set((state) => ({
-			basket: state.basket.filter((item) => item.id !== id),
-		})),
+	calculateTotalCost: () => {
+		const total = get().basket.reduce((total, item) => {
+			const price = Number.parseFloat(item.book.price.replace("$", ""));
+			return total + price * item.quantity;
+		}, 0);
+		console.log(total);
+		return total;
+	},
 	clearBasket: () => set({ basket: [] }),
-	loadBasket: () => {
+	loadBasket: async () => {
 		if (get().authenticated) {
-			const storedBasket = JSON.parse(
+			const storedBasket: ReducedBasketItem[] = JSON.parse(
 				localStorage.getItem(`basket-${get().email}`) || "[]",
 			);
-			set({ basket: storedBasket });
+
+			console.log(storedBasket);
+
+			const reconstructedBasket: BasketItem[] = [];
+			for (const item of storedBasket) {
+				const book = await getBook(item.id);
+				if (book) {
+					reconstructedBasket.push({
+						book: book,
+						quantity: item.quantity,
+					});
+				}
+			}
+
+			set({ basket: reconstructedBasket });
 		}
 	},
 	saveBasket: () => {
 		if (get().authenticated) {
-			const basket = get().basket;
+			const basket = get().basket.map((item) => ({
+				id: item.book.id,
+				quantity: item.quantity,
+			}));
 			localStorage.setItem(`basket-${get().email}`, JSON.stringify(basket));
 		}
-	}
+	},
 }));

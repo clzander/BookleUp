@@ -4,8 +4,6 @@ import {
 	type LoaderFunctionArgs,
 } from "react-router";
 import type { Book } from "../utils/interfaces";
-import { useContext } from "react";
-import { BasketContext } from "../contexts/BasketContext";
 import { useStore } from "../domain/store";
 
 export const BookDetailsPageLoader = async ({ params }: LoaderFunctionArgs) => {
@@ -39,7 +37,7 @@ export function BookDetailsPage() {
 	const book = useLoaderData() as Book;
 	const navigate = useNavigate();
 	const isAdmin = useStore(state => state.isAdmin);
-	const basketContext = useContext(BasketContext);
+	const addToBasket = useStore(state => state.addToBasket);
 
 	return (
 		<div className="flex-grow overflow-auto m-8 w-2/3 mx-auto">
@@ -113,7 +111,7 @@ export function BookDetailsPage() {
 							type="button"
 							className="btn"
 							disabled={isAdmin}
-							onClick={() => basketContext.addToBasket(book)}
+							onClick={() => addToBasket(book)}
 						>
 							Buy
 						</button>

@@ -12,11 +12,11 @@ export default function BasketPage() {
 	}, []);
 
 	return (
-		<div>
+		<div className=" flex flex-grow justify-center items-center">
 			{!loaded ? (
 				<span className="loading loading-spinner loading-lg"/>
 			) : (
-				<p>Thank's for your order!</p>
+				<h1 className="text-2xl font-bold">Thank's for your order!</h1>
 			)}
 		</div>
 	);
