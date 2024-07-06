@@ -6,10 +6,10 @@ export default function BasketPage() {
 	const removeFromBasket = useStore((state) => state.removeFromBasket);
 
 	return (
-		<div className="flex p-8 flex-grow">
+		<div className="flex p-8 overflow-auto">
 			<div className="w-2/3">
-				<div className="overflow-x-auto grow mr-16">
-					<table className="table">
+				<div className="h-full overflow-auto mr-16">
+					<table className="table table-pin-rows">
 						{/* head */}
 						<thead>
 							<tr>
@@ -19,7 +19,7 @@ export default function BasketPage() {
 								<th>Remove</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody className="overflow">
 							{basket.map((item) => (
 								<tr key={item.book.isbn}>
 									<td>{item.book.title}</td>
