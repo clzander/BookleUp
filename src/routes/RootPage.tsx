@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useStore } from "../domain/store";
 
 export default function RootPage() {
-	const authenticated = useStore(state => state.authenticated);
+	const authenticated = useStore((state) => state.authenticated);
 	const navigate = useNavigate();
 
 	useEffect(() => {

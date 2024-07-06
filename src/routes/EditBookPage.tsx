@@ -3,34 +3,17 @@ import {
 	type LoaderFunctionArgs,
 	useLoaderData,
 	useNavigate,
+	redirect,
 } from "react-router";
 import type { Book } from "../utils/interfaces";
+import { getBook, putBook } from "../utils/api";
 
 export const EditBookPageLoader = async ({ params }: LoaderFunctionArgs) => {
-	const fetchURL: string = `http://127.0.0.1:4730/books/${params.isbn}`;
-
-	const response = fetch(fetchURL, {
-		method: "GET",
-		mode: "cors",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	})
-		.then((response) => {
-			if (response.ok) {
-				return response.json() as Promise<Book>;
-			}
-			throw new Error("Network response was not ok!");
-		})
-		.then((data) => {
-			return data;
-		})
-		.catch((error) => {
-			console.error("Fetching [GET BOOK] failed:\n", error);
-			return [];
-		});
-
-	return response;
+	const id = params.id;
+	if (id) {
+		return await getBook(id);
+	}
+	return redirect("/products");
 };
 
 export default function EditBookPage() {
@@ -47,9 +30,6 @@ export default function EditBookPage() {
 
 	async function handleSubmit(event: FormEvent) {
 		event.preventDefault();
-		interface ResponseType {
-			id: string;
-		}
 
 		const payload = {
 			title: title,
@@ -63,30 +43,7 @@ export default function EditBookPage() {
 			cover: book.cover,
 		};
 
-		const response = await fetch(`http://127.0.0.1:4730/books/${book.id}`, {
-			method: "PUT",
-			mode: "cors", // no-cors, *cors, same-origin
-			headers: {
-				"Content-Type": "application/json",
-				// 'Content-Type': 'application/x-www-form-urlencoded',
-			},
-			body: JSON.stringify(payload),
-		})
-			.then((response) => {
-				if (response.ok) {
-					return response.json() as Promise<ResponseType>;
-				}
-				throw new Error("Couldn't save changes for book");
-			})
-			.then((data) => {
-				return data;
-			})
-			.catch((error) => {
-				console.error(
-					"There was a problem with the fetch operation [PUT EDITED BOOK]:",
-					error,
-				);
-			});
+		const response = await putBook(book.id, payload);
 		navigate(`/products/${response?.id}`);
 	}
 

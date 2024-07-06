@@ -3,11 +3,11 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useStore } from "../domain/store";
 
 interface RequireLoginProps {
-	children: ReactNode
+	children: ReactNode;
 }
 
 export default function RequireLogin({ children }: RequireLoginProps) {
-	const authenticated = useStore((state) => state.authenticated)
+	const authenticated = useStore((state) => state.authenticated);
 	const location = useLocation();
 
 	return authenticated === true ? (

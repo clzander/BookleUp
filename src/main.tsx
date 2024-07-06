@@ -46,7 +46,7 @@ const router = createBrowserRouter([
 				element: <AboutPage />,
 			},
 			{
-				path: "/products/:isbn",
+				path: "/products/:id",
 				loader: BookDetailsPageLoader,
 				element: (
 					<RequireLogin>
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
 				),
 			},
 			{
-				path: "/products/:isbn/edit",
+				path: "/products/:id/edit",
 				loader: EditBookPageLoader,
 				element: (
 					<RequireAdmin>
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
 				),
 			},
 			{
-				path: "/products/:isbn/delete",
+				path: "/products/:id/delete",
 				loader: DeleteBookPageLoader,
 				element: (
 					<RequireAdmin>

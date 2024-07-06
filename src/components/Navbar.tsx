@@ -3,11 +3,11 @@ import { useStore } from "../domain/store";
 
 export default function Navbar() {
 	const navigate = useNavigate();
-	const isAdmin = useStore(state => state.isAdmin)
-	const authenticated = useStore(state => state.authenticated)
-	const basket = useStore(state => state.basket);
-	const calculateTotalCost = useStore(state => state.calculateTotalCost);
-	const logout = useStore(state => state.logout)
+	const isAdmin = useStore((state) => state.isAdmin);
+	const authenticated = useStore((state) => state.authenticated);
+	const basket = useStore((state) => state.basket);
+	const calculateTotalCost = useStore((state) => state.calculateTotalCost);
+	const logout = useStore((state) => state.logout);
 
 	return (
 		<div className="navbar bg-neutral min-h-20">
@@ -21,7 +21,12 @@ export default function Navbar() {
 				</button>
 			</div>
 			<label className="input input-bordered flex items-center gap-2 rounded-3xl h-10 mr-8">
-				<input type="text" className="grow" placeholder="Search" disabled={!authenticated}/>
+				<input
+					type="text"
+					className="grow"
+					placeholder="Search"
+					disabled={!authenticated}
+				/>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 16 16"
@@ -63,8 +68,7 @@ export default function Navbar() {
 					<div className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
 						<div className="card-body">
 							<span className="font-bold text-lg">
-								{basket.length}{" "}
-								{basket.length === 1 ? "Item" : "Items"}
+								{basket.length} {basket.length === 1 ? "Item" : "Items"}
 							</span>
 							<span className="text-info">
 								Subtotal: ${calculateTotalCost().toFixed(2)}

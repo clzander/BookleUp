@@ -10,8 +10,8 @@ interface BookProps {
 }
 
 export default function Book({ book, refresh, deleteBook }: BookProps) {
-	const isAdmin = useStore(state => state.isAdmin);
-	const addToBasket = useStore(state => state.addToBasket);
+	const isAdmin = useStore((state) => state.isAdmin);
+	const addToBasket = useStore((state) => state.addToBasket);
 	const [likes, setLikes] = useState<number>(0);
 	const navigate = useNavigate();
 

@@ -1,36 +1,19 @@
 import {
+	redirect,
 	useLoaderData,
 	useNavigate,
 	type LoaderFunctionArgs,
 } from "react-router";
 import useBooks from "../domain/hooks";
 import type { Book } from "../utils/interfaces";
+import { getBook } from "../utils/api";
 
 export const DeleteBookPageLoader = async ({ params }: LoaderFunctionArgs) => {
-	const fetchURL: string = `http://127.0.0.1:4730/books/${params.isbn}`;
-
-	const response = fetch(fetchURL, {
-		method: "GET",
-		mode: "cors",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	})
-		.then((response) => {
-			if (response.ok) {
-				return response.json() as Promise<Book>;
-			}
-			throw new Error("Network response was not ok!");
-		})
-		.then((data) => {
-			return data;
-		})
-		.catch((error) => {
-			console.error("Fetching [GET BOOK] failed:\n", error);
-			return [];
-		});
-
-	return response;
+	const id = params.id;
+	if (id) {
+		return await getBook(id);
+	}
+	return redirect("/products");
 };
 
 export default function DeleteBookPage() {

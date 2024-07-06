@@ -3,7 +3,6 @@ import { useStore } from "../domain/store";
 
 export default function BasketPage() {
 	const basket = useStore((state) => state.basket);
-	const calculateTotalCost = useStore((state) => state.calculateTotalCost);
 	const removeFromBasket = useStore((state) => state.removeFromBasket);
 
 	return (
@@ -46,7 +45,7 @@ export default function BasketPage() {
 				</div>
 			</div>
 			<div className="w-1/3">
-				<BasketSummary/>
+				<BasketSummary />
 			</div>
 		</div>
 	);

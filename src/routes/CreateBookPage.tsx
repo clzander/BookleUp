@@ -1,5 +1,6 @@
 import { type FormEvent, useState } from "react";
 import { useNavigate } from "react-router";
+import { postBook } from "../utils/api";
 
 export default function CreateBookPage() {
 	const navigate = useNavigate();
@@ -15,9 +16,6 @@ export default function CreateBookPage() {
 
 	async function handleSubmit(event: FormEvent) {
 		event.preventDefault();
-		interface ResponseType {
-			id: string;
-		}
 
 		const payload = {
 			title: title,
@@ -31,28 +29,8 @@ export default function CreateBookPage() {
 			cover: cover,
 		};
 
-		const response = await fetch("http://127.0.0.1:4730/books", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(payload),
-		})
-			.then((response) => {
-				if (response.ok) {
-					return response.json() as Promise<ResponseType>;
-				}
-			})
-			.then((data) => {
-				return data?.id;
-			})
-			.catch((error) => {
-				console.error(
-					"There was a problem with the fetch operation [POST NEW BOOK]:",
-					error,
-				);
-			});
-		navigate(`/products/${response}`);
+		const response = await postBook(payload);
+		navigate(`/products/${response?.id}`);
 	}
 
 	return (
@@ -130,11 +108,11 @@ export default function CreateBookPage() {
 						Price
 						<input
 							required
-							type="text"
+							type="number"
 							placeholder="Price"
 							className="input input-bordered w-full max-w-xs"
 							value={price}
-							onChange={(e) => setPrice(e.target.value)}
+							onChange={(e) => setPrice(`$${e.target.value}`)}
 						/>
 					</label>
 					<label className="text-xl flex flex-row justify-between items-center">

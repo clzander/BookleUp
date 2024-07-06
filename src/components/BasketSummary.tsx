@@ -4,7 +4,7 @@ import { useStore } from "../domain/store";
 const BasketSummary = () => {
 	const shipping = 4.99;
 	const discount = 0;
-	const calculateTotalCost = useStore(state => state.calculateTotalCost)
+	const calculateTotalCost = useStore((state) => state.calculateTotalCost);
 	const navigate = useNavigate();
 	const clearBasket = useStore((state) => state.clearBasket);
 
@@ -33,7 +33,9 @@ const BasketSummary = () => {
 			<hr className="my-2" />
 			<div className="font-bold text-lg">
 				<span>Total: </span>
-				<span className="float-right">{(calculateTotalCost() + 4.99).toFixed(2)} $</span>
+				<span className="float-right">
+					{(calculateTotalCost() + 4.99).toFixed(2)} $
+				</span>
 			</div>
 			<button
 				disabled={calculateTotalCost() === 0}

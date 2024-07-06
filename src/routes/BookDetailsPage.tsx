@@ -1,43 +1,26 @@
 import {
+	redirect,
 	useLoaderData,
 	useNavigate,
 	type LoaderFunctionArgs,
 } from "react-router";
 import type { Book } from "../utils/interfaces";
 import { useStore } from "../domain/store";
+import { getBook } from "../utils/api";
 
 export const BookDetailsPageLoader = async ({ params }: LoaderFunctionArgs) => {
-	const fetchURL: string = `http://127.0.0.1:4730/books/${params.isbn}`;
-
-	const response = fetch(fetchURL, {
-		method: "GET",
-		mode: "cors",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	})
-		.then((response) => {
-			if (response.ok) {
-				return response.json() as Promise<Book>;
-			}
-			throw new Error("Network response was not ok!");
-		})
-		.then((data) => {
-			return data;
-		})
-		.catch((error) => {
-			console.error("Fetching [GET BOOK] failed:\n", error);
-			return [];
-		});
-
-	return response;
+	const id = params.id;
+	if (id) {
+		return await getBook(id);
+	}
+	return redirect("/products");
 };
 
 export function BookDetailsPage() {
 	const book = useLoaderData() as Book;
 	const navigate = useNavigate();
-	const isAdmin = useStore(state => state.isAdmin);
-	const addToBasket = useStore(state => state.addToBasket);
+	const isAdmin = useStore((state) => state.isAdmin);
+	const addToBasket = useStore((state) => state.addToBasket);
 
 	return (
 		<div className="flex-grow overflow-auto m-8 w-2/3 mx-auto">
@@ -63,9 +46,7 @@ export function BookDetailsPage() {
 					<p className="w-1/3 h-full m-auto text-center">No Image</p>
 				)}
 				<div className="mt-8 p-6 w-full">
-					<h2 className="text-3xl font-bold mb-2">
-						{book.title}
-					</h2>
+					<h2 className="text-3xl font-bold mb-2">{book.title}</h2>
 					<h3 className="text-2xl font-semibold text-gray-800 mb-8">
 						{book.subtitle}
 					</h3>

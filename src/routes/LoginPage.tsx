@@ -3,9 +3,9 @@ import { useNavigate } from "react-router";
 import { useStore } from "../domain/store";
 
 export default function LoginPage() {
-	const login = useStore((state) => state.login)
-	const authenticated = useStore((state) => state.authenticated)
-	const error = useStore((state) => state.error)
+	const login = useStore((state) => state.login);
+	const authenticated = useStore((state) => state.authenticated);
+	const error = useStore((state) => state.error);
 	const navigate = useNavigate();
 
 	const [email, setEmail] = useState<string>("");

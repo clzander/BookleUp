@@ -18,7 +18,7 @@ export default function BooksPage() {
 		deleteBook,
 	} = useBooks();
 	const navigate = useNavigate();
-	const isAdmin = useStore(state => state.isAdmin);
+	const isAdmin = useStore((state) => state.isAdmin);
 
 	useEffect(() => {
 		const interval = setInterval(() => {

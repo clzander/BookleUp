@@ -39,3 +39,21 @@ export function getBook(bookId: string) {
 		undefined,
 	);
 }
+
+export function postBook(newBook: Omit<Book, "id">) {
+	return sendFetch<Book>(
+		"http://127.0.0.1:4730/books",
+		"POST",
+		"Fetching [POST BOOK] failed:\n",
+		newBook,
+	);
+}
+
+export function putBook(bookId: string, editedBook: Omit<Book, "id">) {
+	return sendFetch<Book>(
+		`http://127.0.0.1:4730/books/${bookId}`,
+		"POST",
+		"Fetching [POST BOOK] failed:\n",
+		editedBook,
+	);
+}
