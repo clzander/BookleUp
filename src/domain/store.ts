@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import type { Book } from "../utils/interfaces";
 import { getBook } from "../utils/api";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 interface AuthPayloadType {
 	email: string;
@@ -119,7 +120,6 @@ export const useStore = create<StoreState>()((set, get) => ({
 			const price = Number.parseFloat(item.book.price.replace("$", ""));
 			return total + price * item.quantity;
 		}, 0);
-		console.log(total);
 		return total;
 	},
 	clearBasket: () => set({ basket: [] }),
@@ -128,8 +128,6 @@ export const useStore = create<StoreState>()((set, get) => ({
 			const storedBasket: ReducedBasketItem[] = JSON.parse(
 				localStorage.getItem(`basket-${get().email}`) || "[]",
 			);
-
-			console.log(storedBasket);
 
 			const reconstructedBasket: BasketItem[] = [];
 			for (const item of storedBasket) {

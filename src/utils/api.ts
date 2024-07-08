@@ -52,7 +52,7 @@ export function postBook(newBook: Omit<Book, "id">) {
 export function putBook(bookId: string, editedBook: Omit<Book, "id">) {
 	return sendFetch<Book>(
 		`http://127.0.0.1:4730/books/${bookId}`,
-		"POST",
+		"PUT",
 		"Fetching [POST BOOK] failed:\n",
 		editedBook,
 	);

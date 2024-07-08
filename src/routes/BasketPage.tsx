@@ -6,7 +6,7 @@ export default function BasketPage() {
 	const removeFromBasket = useStore((state) => state.removeFromBasket);
 
 	return (
-		<div className="flex p-8 overflow-auto">
+		<div className="flex p-8 overflow-auto flex-grow">
 			<div className="w-2/3">
 				<div className="h-full overflow-auto mr-16">
 					<table className="table table-pin-rows">

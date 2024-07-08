@@ -11,7 +11,7 @@ export default function CreateBookPage() {
 	const [numPages, setNumPages] = useState<number>(1);
 	const [author, setAuthor] = useState<string>("");
 	const [publisher, setPublisher] = useState<string>("");
-	const [price, setPrice] = useState<string>("");
+	const [price, setPrice] = useState<number>();
 	const [cover, setCover] = useState<string>("");
 
 	async function handleSubmit(event: FormEvent) {
@@ -25,7 +25,7 @@ export default function CreateBookPage() {
 			numPages: numPages,
 			author: author,
 			publisher: publisher,
-			price: price,
+			price: `$${price}`,
 			cover: cover,
 		};
 
@@ -112,7 +112,7 @@ export default function CreateBookPage() {
 							placeholder="Price"
 							className="input input-bordered w-full max-w-xs"
 							value={price}
-							onChange={(e) => setPrice(`$${e.target.value}`)}
+							onChange={(e) => setPrice(Number.parseFloat(e.target.value))}
 						/>
 					</label>
 					<label className="text-xl flex flex-row justify-between items-center">
