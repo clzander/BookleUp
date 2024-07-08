@@ -3,7 +3,6 @@ import {
 	type LoaderFunctionArgs,
 	useLoaderData,
 	useNavigate,
-	redirect,
 } from "react-router";
 import type { Book } from "../utils/interfaces";
 import { getBook, putBook } from "../utils/api";
@@ -13,7 +12,7 @@ export const EditBookPageLoader = async ({ params }: LoaderFunctionArgs) => {
 	if (id) {
 		return await getBook(id);
 	}
-	return redirect("/products");
+	return null;
 };
 
 export default function EditBookPage() {

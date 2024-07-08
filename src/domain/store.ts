@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import type { Book } from "../utils/interfaces";
 import { getBook } from "../utils/api";
-import { createJSONStorage, persist } from "zustand/middleware";
 
 interface AuthPayloadType {
 	email: string;

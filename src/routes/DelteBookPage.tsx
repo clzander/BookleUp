@@ -1,5 +1,4 @@
 import {
-	redirect,
 	useLoaderData,
 	useNavigate,
 	type LoaderFunctionArgs,
@@ -13,7 +12,7 @@ export const DeleteBookPageLoader = async ({ params }: LoaderFunctionArgs) => {
 	if (id) {
 		return await getBook(id);
 	}
-	return redirect("/products");
+	return null;
 };
 
 export default function DeleteBookPage() {
