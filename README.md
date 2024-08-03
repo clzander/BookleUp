@@ -1,6 +1,3 @@
-This is the project from Cl.... Za.... (MtrNr.: 57...5)
-Since I don't want my full name and matriculation number in a Mircosoft service, I've shortened them :D
-
 # BookleUp
 "BookleUp" is my little online bookstore that has to be implemented in a frontend development course at university.
 
